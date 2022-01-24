@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    build: ./database
+    environment:
+      - POSTGRES_PASSWORD=WordyMcPasswordy
+    ports:
+      - "6432:5432"
+    volumes:
+      - ./database/setup:/docker-entrypoint-initdb.d
+
+  app:
+    build:
+      context: .
+    command:
+      ["/app/wait-for/wait-for", "db:5432", "--", "npm", "run", "start:dev"]
+    ports:
+      - "8184:8184"
+    environment:
+      - PORT=8184
+      - HOST=0.0.0.0
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example?schema=public
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/dist
+    depends_on:
+      - db
