@@ -1,6 +1,5 @@
 import initApp from "./core/app";
 import { getConfig, getConfigNumber } from "./core/config";
-
 import "./core/errorHandler";
 
 const port = getConfigNumber("PORT", 4000);

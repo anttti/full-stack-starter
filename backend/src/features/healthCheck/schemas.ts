@@ -3,13 +3,13 @@ import type { RouteGenericInterface } from "fastify/types/route";
 
 import { AppError } from "../../core/errors";
 
-const healthCheckResponse = Codec.interface({
+const HealthCheckResponse = Codec.interface({
   ok: boolean,
 });
 
-export const healthCheckResponseSchema = healthCheckResponse.schema();
+export const healthCheckResponseSchema = HealthCheckResponse.schema();
 
-export type HealthCheckResponse = GetType<typeof healthCheckResponse>;
+export type HealthCheckResponse = GetType<typeof HealthCheckResponse>;
 
 export interface HealthCheckRoute extends RouteGenericInterface {
   readonly Reply: HealthCheckResponse | AppError;
