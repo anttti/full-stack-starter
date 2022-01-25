@@ -12,3 +12,11 @@ Contents:
 - Docker
 
 To start: `docker compose up --build`
+
+## TODO
+
+- Logging
+- Test frameworks for backend and frontend
+- Frontend state mgmt
+- Frontend routing
+- ...
