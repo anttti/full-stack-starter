@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=DevAdmin
     ports:
-      - "6432:5432"
+      - "5432:5432"
     volumes:
       - ./backend/database/setup:/docker-entrypoint-initdb.d
 
@@ -28,7 +28,8 @@ services:
       - PORT=4000
       - HOST=0.0.0.0
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example?schema=public
+      # Added a connect_timeout due to https://stackoverflow.com/questions/68476229/m1-related-prisma-cant-reach-database-server-at-database5432
+      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example?schema=public&connect_timeout=300
     volumes:
       - ./backend:/app
       - /app/node_modules
