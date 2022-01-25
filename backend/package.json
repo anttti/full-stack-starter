@@ -8,7 +8,8 @@
     "build": "npm run build:clean && tsc",
     "build:watch": "npm run build:clean && tsc -w",
     "start": "NODE_ENV=development node dist/server.js",
-    "start:dev": "NODE_ENV=development tsc-watch --onSuccess 'npm run start'"
+    "start:dev": "npm run migrate:dev && NODE_ENV=development tsc-watch --onSuccess 'npm run start'",
+    "migrate:dev": "prisma migrate dev"
   },
   "keywords": [],
   "author": "",

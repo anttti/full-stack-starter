@@ -3,7 +3,7 @@ import { getConfig, getConfigNumber } from "./core/config";
 
 import "./core/errorHandler";
 
-const port = getConfigNumber("PORT", 8184);
+const port = getConfigNumber("PORT", 4000);
 
 initApp()
   .then((app) => {

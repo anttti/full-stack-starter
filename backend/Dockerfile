@@ -1,6 +1,7 @@
 FROM node:16
 
 WORKDIR /app
+EXPOSE 4000
 
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
