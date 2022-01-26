@@ -10,6 +10,9 @@ Contents:
 - Tailwind
 - Vite
 - Docker
+- Testcontainers
+- Vitest? Jest?
+- Graphile Migrate
 
 To start: `docker compose up --build`
 
