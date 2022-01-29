@@ -8,7 +8,7 @@
     "build": "npm run build:clean && tsc",
     "build:watch": "npm run build:clean && tsc -w",
     "start": "node dist/server.js",
-    "start:dev": "tsc-watch --onSuccess 'npm run start'",
+    "start:dev": "tsc-watch --noClear --onSuccess 'npm run start'",
     "dev": "npx node-pg-migrate up && concurrently \"npm run pg:watch\" \"npm run start:dev\"",
     "pg:watch": "pgtyped -w -c pgtyped.config.json"
   },

@@ -1,5 +1,13 @@
-/** Types generated for queries found in "src/features/user/queries.sql" */
+/** Types generated for queries found in "src/features/user/user.sql" */
 import { PreparedQuery } from '@pgtyped/query';
+
+export type color = 'BLUE' | 'GREEN' | 'RED';
+
+export type user_type = 'ADMIN' | 'NORMAL';
+
+export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
+
+export type colorArray = (color)[];
 
 /** 'ListAllUsers' parameters type */
 export type IListAllUsersParams = void;
@@ -8,9 +16,12 @@ export type IListAllUsersParams = void;
 export interface IListAllUsersResult {
   createdAt: Date;
   email: string;
+  favoriteColors: colorArray;
   id: string;
+  meta: Json;
   updatedAt: Date;
   username: string;
+  userType: user_type;
 }
 
 /** 'ListAllUsers' query type */
@@ -39,9 +50,12 @@ export interface IFindUserByIdParams {
 export interface IFindUserByIdResult {
   createdAt: Date;
   email: string;
+  favoriteColors: colorArray;
   id: string;
+  meta: Json;
   updatedAt: Date;
   username: string;
+  userType: user_type;
 }
 
 /** 'FindUserById' query type */
@@ -91,20 +105,38 @@ const insertUserIR: any = {"name":"InsertUser","params":[{"name":"user","codeRef
 export const insertUser = new PreparedQuery<IInsertUserParams,IInsertUserResult>(insertUserIR);
 
 
-/** Query 'FindUsers' is invalid, so its result is assigned type 'never' */
-export type IFindUsersResult = never;
+/** 'FindUsers' parameters type */
+export interface IFindUsersParams {
+  email: string | null | void;
+  username: string | null | void;
+}
 
-/** Query 'FindUsers' is invalid, so its parameters are assigned type 'never' */
-export type IFindUsersParams = never;
+/** 'FindUsers' return type */
+export interface IFindUsersResult {
+  createdAt: Date;
+  email: string;
+  favoriteColors: colorArray;
+  id: string;
+  meta: Json;
+  updatedAt: Date;
+  username: string;
+  userType: user_type;
+}
 
-const findUsersIR: any = {"name":"FindUsers","params":[{"name":"username","required":false,"transform":{"type":"scalar"},"codeRefs":{"used":[{"a":287,"b":294,"line":15,"col":8},{"a":319,"b":326,"line":15,"col":40}]}},{"name":"email","required":false,"transform":{"type":"scalar"},"codeRefs":{"used":[{"a":337,"b":341,"line":16,"col":8},{"a":363,"b":367,"line":16,"col":34}]}}],"usedParamSet":{"username":true,"email":true},"statement":{"body":"SELECT * FROM users\nWHERE (:username IS NULL OR username = :username)\n  AND (:email IS NULL OR email = :email)","loc":{"a":259,"b":368,"line":14,"col":0}}};
+/** 'FindUsers' query type */
+export interface IFindUsersQuery {
+  params: IFindUsersParams;
+  result: IFindUsersResult;
+}
+
+const findUsersIR: any = {"name":"FindUsers","params":[{"name":"username","required":false,"transform":{"type":"scalar"},"codeRefs":{"used":[{"a":289,"b":296,"line":15,"col":10},{"a":327,"b":334,"line":15,"col":48}]}},{"name":"email","required":false,"transform":{"type":"scalar"},"codeRefs":{"used":[{"a":351,"b":355,"line":16,"col":8},{"a":383,"b":387,"line":16,"col":40}]}}],"usedParamSet":{"username":true,"email":true},"statement":{"body":"SELECT * FROM users\n  WHERE (:username::text IS NULL OR username = :username::text)\n  AND (:email::text IS NULL OR email = :email::text)","loc":{"a":259,"b":394,"line":14,"col":0}}};
 
 /**
  * Query generated from SQL:
  * ```
  * SELECT * FROM users
- * WHERE (:username IS NULL OR username = :username)
- *   AND (:email IS NULL OR email = :email)
+ *   WHERE (:username::text IS NULL OR username = :username::text)
+ *   AND (:email::text IS NULL OR email = :email::text)
  * ```
  */
 export const findUsers = new PreparedQuery<IFindUsersParams,IFindUsersResult>(findUsersIR);

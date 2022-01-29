@@ -12,5 +12,5 @@ INSERT INTO users (username, email) VALUES :user RETURNING id;
 
 /* @name FindUsers */
 SELECT * FROM users
-WHERE (:username IS NULL OR username = :username)
-  AND (:email IS NULL OR email = :email);
+  WHERE (:username::text IS NULL OR username = :username::text)
+  AND (:email::text IS NULL OR email = :email::text);
