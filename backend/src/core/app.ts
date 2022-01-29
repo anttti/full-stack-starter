@@ -1,21 +1,15 @@
-import fastify, {
-  FastifyHttpsOptions,
-  FastifyInstance,
-  FastifyServerOptions,
-} from "fastify";
-import type { Server as HttpsServer } from "https";
-import type { Server as HttpServer } from "http";
+import fastify, { FastifyInstance } from "fastify";
+import { fastifyPostgres } from "fastify-postgres";
 
 import v1 from "../api";
-import { prismaPlugin } from "../plugins/prisma";
+import { getConfig } from "./config";
 
 const initApp = async (): Promise<FastifyInstance> => {
-  const opts:
-    | FastifyHttpsOptions<HttpsServer>
-    | FastifyServerOptions<HttpServer> = {};
-  const app = fastify(opts);
-  app.register(prismaPlugin);
+  const app = fastify();
   await app.register(v1, { prefix: "/api/v1" });
+  app.register(fastifyPostgres, {
+    connectionString: getConfig("DATABASE_URL"),
+  });
 
   return app;
 };

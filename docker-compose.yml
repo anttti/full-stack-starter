@@ -4,32 +4,30 @@ services:
   db:
     build: ./backend/database
     environment:
-      - POSTGRES_PASSWORD=DevAdmin
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
       - ./backend/database/setup:/docker-entrypoint-initdb.d
 
-  frontend:
-    build:
-      context: ./frontend
-    command: ["npm", "run", "dev", "--", "--host"]
-    ports:
-      - "3000:3000"
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   command: ["npm", "run", "dev", "--", "--host"]
+  #   ports:
+  #     - "3000:3000"
 
   backend:
     build:
       context: ./backend
-    command:
-      ["/app/wait-for/wait-for", "db:5432", "--", "npm", "run", "start:dev"]
+    command: ["/app/wait-for/wait-for", "db:5432", "--", "npm", "run", "dev"]
     ports:
       - "4000:4000"
     environment:
       - PORT=4000
       - HOST=0.0.0.0
       - NODE_ENV=development
-      # Added a connect_timeout due to https://stackoverflow.com/questions/68476229/m1-related-prisma-cant-reach-database-server-at-database5432
-      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example?schema=public&connect_timeout=300
+      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example
     volumes:
       - ./backend:/app
       - /app/node_modules

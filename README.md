@@ -4,15 +4,15 @@ Contents:
 
 - TypeScript
 - Fastify
-- Prisma
 - PostgreSQL
+- node-pg-migrate
+- pgtyped
 - React
 - Tailwind
 - Vite
 - Docker
 - Testcontainers
-- Vitest? Jest?
-- Graphile Migrate
+- Jest
 
 To start: `docker compose up --build`
 
