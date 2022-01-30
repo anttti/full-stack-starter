@@ -18,7 +18,7 @@ const User = Codec.interface({
   username: string,
   email: string,
   userType: enumeration(UserType),
-  favoriteColors: array(enumeration(Color)),
+  // favoriteColors: array(enumeration(Color)),
 });
 
 export { User };

@@ -5,7 +5,8 @@ type AppError = fastifyCreateError.FastifyError;
 
 enum ErrorCodes {
   GENERIC_DB_QUERY_FAILED = "GENERIC_DB_QUERY_FAILED",
-  ONE_RETURNED_NONE_OR_MANY = "ONE_RETURNED_NONE_OR_MANY",
+  ONE_RETURNED_NONE = "ONE_RETURNED_NONE",
+  ONE_RETURNED_MANY = "ONE_RETURNED_MANY",
   HEALTH_CHECK_FAILED = "HEALTH_CHECK_FAILED",
   USER_NOT_FOUND = "USER_NOT_FOUND",
 }
@@ -26,9 +27,14 @@ const errors: Errors = {
     "%s",
     500
   ),
-  ONE_RETURNED_NONE_OR_MANY: createError(
-    ErrorCodes.ONE_RETURNED_NONE_OR_MANY,
-    "DB query expected exactly one result row, but got 0 or more than 1 rows",
+  ONE_RETURNED_NONE: createError(
+    ErrorCodes.ONE_RETURNED_NONE,
+    "DB query expected exactly one result row, but got 0 rows",
+    500
+  ),
+  ONE_RETURNED_MANY: createError(
+    ErrorCodes.ONE_RETURNED_MANY,
+    "DB query expected exactly one result row, but got more than 1 row",
     500
   ),
   HEALTH_CHECK_FAILED: createError(ErrorCodes.HEALTH_CHECK_FAILED, "%s", 500),
