@@ -27,9 +27,15 @@ services:
       - PORT=4000
       - HOST=0.0.0.0
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://app_user:app_user@db:5432/example
+      - PG_HOST=db
+      - PG_PORT=5342
+      - PG_USER=app_user
+      - PG_PASSWORD=app_user
+      - PG_DATABASE=example
+      # For node-pg-migrate
+      - DATABASE_URL=postgres://migration_user:migration_user@db:5432/example
     volumes:
-      - ./backend:/app
+      - ./backend:/app/:cached
       - /app/node_modules
       - /app/dist
     depends_on:
