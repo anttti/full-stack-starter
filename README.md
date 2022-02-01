@@ -13,14 +13,18 @@ Contents:
 - Docker
 - Testcontainers
 - Jest
+- Swagger
 
 To start: `docker compose up --build`
 
 ## TODO
 
+- Linting
 - Logging
   - Fastify hook to log errors automatically?
-- Test frameworks for backend and frontend
+- Test framework for frontend
+- Storybook
 - Frontend state mgmt
 - Frontend routing
+- Frontend data fetching
 - ...

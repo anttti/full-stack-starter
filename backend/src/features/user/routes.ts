@@ -17,38 +17,28 @@ import {
 } from "./schemas/createUser";
 
 const routes: FastifyPluginAsync = (instance) => {
-  /**
-   * @api {GET} / Get all users
-   * @apiName GetUsers
-   * @apiGroup GetUsers
-   * @apiVersion 1.0.0
-   *
-   * @apiSuccess (200) {GetUsersResponse} Static response indicating success
-   */
   instance.route<GetUsersRoute>({
     method: "GET",
     url: "/",
     handler: getUsers,
     schema: {
+      tags: ["User"],
+      summary: "Get all users",
+      description: "Retrieve all users",
       response: {
         200: getUsersResponseSchema,
       },
     },
   });
 
-  /**
-   * @api {GET} /:userId Get user by ID
-   * @apiName GetUserById
-   * @apiGroup GetUserById
-   * @apiVersion 1.0.0
-   *
-   * @apiSuccess (200) {GetUsersResponse} Static response indicating success
-   */
   instance.route<GetUserByIdRoute>({
     method: "GET",
     url: "/:userId",
     handler: getUserById,
     schema: {
+      tags: ["User"],
+      summary: "Get user by ID",
+      description: "Retrieve one user by ID",
       params: getUserByIdParamsSchema,
       response: {
         200: getUserByIdResponseSchema,
@@ -56,19 +46,14 @@ const routes: FastifyPluginAsync = (instance) => {
     },
   });
 
-  /**
-   * @api {POST} / Create a user
-   * @apiName CreateUser
-   * @apiGroup CreateUser
-   * @apiVersion 1.0.0
-   *
-   * @apiSuccess (200) {GetUsersResponse} Static response indicating success
-   */
   instance.route<CreateUserRoute>({
     method: "POST",
     url: "/",
     handler: createUser,
     schema: {
+      tags: ["User"],
+      summary: "Create a user",
+      description: "Create a new user",
       body: createUserBodySchema,
       response: {
         200: createUserResponseSchema,

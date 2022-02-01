@@ -4,14 +4,6 @@ import { healthCheck } from "./handlers";
 import { healthCheckResponseSchema, HealthCheckRoute } from "./schemas";
 
 const routes: FastifyPluginAsync = (instance) => {
-  /**
-   * @api {GET} /healthcheck Check service health
-   * @apiName HealthCheck
-   * @apiGroup HealthCheck
-   * @apiVersion 1.0.0
-   *
-   * @apiSuccess (200) {HealthCheckResponse} Static response indicating success
-   */
   instance.route<HealthCheckRoute>({
     method: "GET",
     url: "/",
@@ -20,6 +12,9 @@ const routes: FastifyPluginAsync = (instance) => {
       secure: false,
     },
     schema: {
+      tags: ["Healthcheck"],
+      summary: "Check if server & DB are up",
+      description: "To database and back again!",
       response: {
         200: healthCheckResponseSchema,
       },

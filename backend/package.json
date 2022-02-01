@@ -35,6 +35,7 @@
     "fastify": "^3.27.0",
     "fastify-plugin": "^3.0.0",
     "fastify-postgres": "^3.6.0",
+    "fastify-swagger": "^4.13.1",
     "jest": "^27.4.7",
     "node-pg-migrate": "^6.2.1",
     "pg": "^8.7.1",
