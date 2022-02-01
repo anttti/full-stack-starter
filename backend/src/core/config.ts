@@ -21,13 +21,6 @@ export const getConfigNumber = (
   defaultValue?: number
 ): number | never => Number(getConfig(key, defaultValue?.toString()));
 
-// Get numeric configuration values for cache TTLs. The environment variables
-// are defined in minutes for readability but Redis needs milliseconds
-export const getMinutesAsMilliseconds = (
-  key: string,
-  defaultMinutes?: number
-): number => getConfigNumber(key, defaultMinutes) * 60 * 1000;
-
 export const getNodeEnv = (): string => {
   const env = getConfig("NODE_ENV", "");
   return (env && env.toLowerCase()) || "";
