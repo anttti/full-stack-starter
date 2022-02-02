@@ -46,6 +46,7 @@
     "jest": "^27.4.7",
     "node-pg-migrate": "^6.2.1",
     "pg": "^8.7.1",
+    "pino-pretty": "^7.5.1",
     "prettier": "^2.5.1",
     "purify-ts": "^1.1.0",
     "testcontainers": "^8.2.0",
