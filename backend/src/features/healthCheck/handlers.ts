@@ -1,5 +1,4 @@
 import type { RouteHandler } from 'fastify'
-import { PoolClient } from 'pg'
 
 import { HealthCheckRoute } from './schemas'
 
