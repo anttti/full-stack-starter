@@ -4,6 +4,7 @@ Contents:
 
 - TypeScript
 - Fastify
+- Pino
 - PostgreSQL
 - node-pg-migrate
 - pgtyped
@@ -20,8 +21,6 @@ To start: `docker compose up --build`
 ## TODO
 
 - Linting
-- Logging
-  - Fastify hook to log errors automatically?
 - Test framework for frontend
 - Storybook
 - Frontend state mgmt
