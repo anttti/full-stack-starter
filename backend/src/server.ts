@@ -7,16 +7,14 @@ const port = getConfigNumber('PORT', 4000)
 initApp()
   .then((app) => {
     if (isDevEnvironment) {
-      // eslint-disable-next-line no-console
-      console.log(app.printRoutes())
+      app.log.info(app.printRoutes())
     }
     app.swagger()
     app.listen(port, getConfig('HOST', '127.0.0.1'), () =>
-      // eslint-disable-next-line no-console
-      console.log(`Example API listening on port ${port}`)
+      app.log.info(`Example API listening on port ${port}`)
     )
   })
   .catch((err: Error) => {
     // eslint-disable-next-line no-console
-    console.log({ err }, 'Example API failed to start')
+    console.error({ err }, 'Example API failed to start')
   })
