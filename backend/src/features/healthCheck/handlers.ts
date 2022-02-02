@@ -1,7 +1,7 @@
-import type { RouteHandler } from "fastify";
+import type { RouteHandler } from 'fastify'
 
-import { HealthCheckRoute } from "./schemas";
+import { HealthCheckRoute } from './schemas'
 
 export const healthCheck: RouteHandler<HealthCheckRoute> = async (_req, res) =>
   // TODO: SELECT 1 from DB
-  res.send({ ok: true });
+  res.send({ ok: true })

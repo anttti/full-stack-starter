@@ -1,0 +1,70 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
+  ignorePatterns: ['**/*.queries.ts'],
+  env: {
+    'jest/globals': true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+  ],
+  plugins: ['prettier', 'jest', 'fp'],
+  rules: {
+    'prettier/prettier': ['error'],
+    eqeqeq: ['error', 'allow-null'],
+    'consistent-return': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
+    'no-console': ['warn'],
+    'fp/no-arguments': 'error',
+    'fp/no-class': 'error',
+    'fp/no-delete': 'error',
+    'fp/no-events': 'error',
+    'fp/no-get-set': 'error',
+    'fp/no-let': 'error',
+    'fp/no-loops': 'error',
+    'fp/no-mutating-assign': 'error',
+    'fp/no-mutating-methods': 'error',
+    'fp/no-mutation': 'error',
+    'fp/no-proxy': 'error',
+    'fp/no-rest-parameters': 'error',
+    'fp/no-this': 'error',
+    'fp/no-valueof-field': 'error',
+    'no-var': 'error',
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always-and-inside-groups',
+        groups: [['builtin', 'external']],
+      },
+    ],
+  },
+  overrides: [
+    {
+      files: ['test/**/*.ts'],
+      rules: {
+        'fp/no-let': 'off',
+        'fp/no-mutation': 'off',
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-focused-tests': 'warn',
+        'jest/no-identical-title': 'error',
+        'jest/prefer-to-have-length': 'warn',
+        'jest/valid-expect': 'error',
+      },
+    },
+  ],
+}

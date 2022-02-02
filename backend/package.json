@@ -12,7 +12,8 @@
     "dev": "npx node-pg-migrate up && concurrently \"npm run pg:watch\" \"npm run start:dev\"",
     "pg:watch": "pgtyped -w -c pgtyped.config.json",
     "test": "TZ=UTC jest --runInBand --detectOpenHandles --coverage",
-    "test:watch": "TZ=UTC jest --watchAll --runInBand --detectOpenHandles --coverage"
+    "test:watch": "TZ=UTC jest --watchAll --runInBand --detectOpenHandles --coverage",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'"
   },
   "keywords": [],
   "author": "",
@@ -30,8 +31,14 @@
     "@pgtyped/cli": "^0.13.0",
     "@pgtyped/query": "^0.13.0",
     "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "dotenv": "^14.2.0",
+    "eslint": "^8.8.0",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "fastify": "^3.27.0",
     "fastify-plugin": "^3.0.0",
     "fastify-postgres": "^3.6.0",
@@ -39,6 +46,7 @@
     "jest": "^27.4.7",
     "node-pg-migrate": "^6.2.1",
     "pg": "^8.7.1",
+    "prettier": "^2.5.1",
     "purify-ts": "^1.1.0",
     "testcontainers": "^8.2.0",
     "ts-jest": "^27.1.3"

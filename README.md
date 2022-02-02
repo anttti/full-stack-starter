@@ -27,4 +27,5 @@ To start: `docker compose up --build`
 - Frontend state mgmt
 - Frontend routing
 - Frontend data fetching
+- Lefthook
 - ...

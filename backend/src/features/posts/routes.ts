@@ -1,11 +1,11 @@
-import type { FastifyPluginAsync } from "fastify";
+import type { FastifyPluginAsync } from 'fastify'
 
-import { createPost } from "./handlers";
+import { createPost } from './handlers'
 import {
   Route as CreatePostRoute,
   responseSchema as createPostResponseSchema,
   bodySchema as createPostBodySchema,
-} from "./schemas/createPost";
+} from './schemas/createPost'
 
 const routes: FastifyPluginAsync = (instance) => {
   /**
@@ -17,8 +17,8 @@ const routes: FastifyPluginAsync = (instance) => {
    * @apiSuccess (201) {CreatePostResponse} The ID of the created post
    */
   instance.route<CreatePostRoute>({
-    method: "POST",
-    url: "/",
+    method: 'POST',
+    url: '/',
     handler: createPost,
     schema: {
       body: createPostBodySchema,
@@ -26,9 +26,9 @@ const routes: FastifyPluginAsync = (instance) => {
         200: createPostResponseSchema,
       },
     },
-  });
+  })
 
-  return Promise.resolve();
-};
+  return Promise.resolve()
+}
 
-export default routes;
+export default routes

@@ -1,8 +1,8 @@
-import { PreparedQuery } from "@pgtyped/query";
-import { PoolClient } from "pg";
-import { EitherAsync, Just, Maybe, Nothing } from "purify-ts";
+import { PreparedQuery } from '@pgtyped/query'
+import { PoolClient } from 'pg'
+import { EitherAsync, Just, Maybe, Nothing } from 'purify-ts'
 
-import { AppError, errors } from "./errors";
+import { AppError, errors } from './errors'
 
 /**
  * Perform a db query expecting exactly one result. Returns a Left if != 1 rows are returned
@@ -17,20 +17,22 @@ const one = <ParamsType, ReturnType>(
   params: ParamsType
 ): EitherAsync<AppError, ReturnType> =>
   EitherAsync(async ({ throwE }) => {
-    let res = [];
+    // eslint-disable-next-line fp/no-let
+    let res = []
     try {
-      res = await queryFn.run(params, client);
+      // eslint-disable-next-line fp/no-mutation
+      res = await queryFn.run(params, client)
       if (res.length === 1) {
-        return res[0];
+        return res[0]
       }
     } catch {
-      throwE(new errors.GENERIC_DB_QUERY_FAILED());
+      throwE(new errors.GENERIC_DB_QUERY_FAILED())
     }
     if (res.length === 0) {
-      return throwE(new errors.ONE_RETURNED_NONE());
+      return throwE(new errors.ONE_RETURNED_NONE())
     }
-    return throwE(new errors.ONE_RETURNED_MANY());
-  });
+    return throwE(new errors.ONE_RETURNED_MANY())
+  })
 
 /**
  * Perform a db query expecting one or zero results. On a successful DB query, if there are one or
@@ -47,18 +49,18 @@ const oneOrNone = <ParamsType, ReturnType>(
 ): EitherAsync<AppError, Maybe<ReturnType>> =>
   EitherAsync(async ({ throwE }) => {
     try {
-      const res = await query.run(params, client);
+      const res = await query.run(params, client)
       if (res.length === 1) {
-        return Just(res[0]);
+        return Just(res[0])
       }
       if (res.length > 1) {
-        throwE(new errors.ONE_RETURNED_MANY());
+        throwE(new errors.ONE_RETURNED_MANY())
       }
     } catch {
-      throwE(new errors.GENERIC_DB_QUERY_FAILED());
+      throwE(new errors.GENERIC_DB_QUERY_FAILED())
     }
-    return Nothing;
-  });
+    return Nothing
+  })
 
 /**
  * Perform a db query expecting zero or more results.
@@ -74,12 +76,12 @@ const many = <ParamsType, ReturnType>(
 ): EitherAsync<AppError, ReturnType[]> =>
   EitherAsync(async ({ throwE }) => {
     try {
-      const res = await query.run(params, client);
-      return res;
+      const res = await query.run(params, client)
+      return res
     } catch {
-      throwE(new errors.GENERIC_DB_QUERY_FAILED());
+      throwE(new errors.GENERIC_DB_QUERY_FAILED())
     }
-    return [];
-  });
+    return []
+  })
 
-export { one, oneOrNone, many };
+export { one, oneOrNone, many }
