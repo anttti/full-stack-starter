@@ -28,7 +28,7 @@ services:
       - HOST=0.0.0.0
       - NODE_ENV=development
       - PG_HOST=db
-      - PG_PORT=5342
+      - PG_PORT=5432
       - PG_USER=app_user
       - PG_PASSWORD=app_user
       - PG_DATABASE=example
