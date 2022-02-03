@@ -9,6 +9,10 @@ describe('Health check endpoint', () => {
     app = await initApp()
   })
 
+  afterAll(async () => {
+    await app.close()
+  })
+
   it('should respond successfully', async () => {
     const response = await app.inject({
       method: 'GET',
