@@ -24,7 +24,6 @@ To start: `docker compose up --build`
 - Test framework for frontend
 - Storybook
 - Frontend state mgmt
-- Frontend routing
 - Frontend data fetching
 - Lefthook
 - ...

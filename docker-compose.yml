@@ -10,12 +10,12 @@ services:
     volumes:
       - ./backend/database/setup:/docker-entrypoint-initdb.d
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   command: ["npm", "run", "dev", "--", "--host"]
-  #   ports:
-  #     - "3000:3000"
+  frontend:
+    build:
+      context: ./frontend
+    command: ["npm", "run", "dev", "--", "--host"]
+    ports:
+      - "3000:3000"
 
   backend:
     build:
