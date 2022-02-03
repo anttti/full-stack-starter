@@ -1,32 +1,67 @@
-import type { FastifyPluginAsync } from "fastify";
+import type { FastifyPluginAsync } from 'fastify'
 
-import { getUsers } from "./handlers";
-import { getUsersResponseSchema, GetUsersRoute } from "./schemas";
+import { createUser, getUserById, getUsers } from './handlers'
+import {
+  Route as GetUsersRoute,
+  responseSchema as getUsersResponseSchema,
+} from './schemas/getUsers'
+import {
+  Route as GetUserByIdRoute,
+  responseSchema as getUserByIdResponseSchema,
+  paramsSchema as getUserByIdParamsSchema,
+} from './schemas/getUserById'
+import {
+  Route as CreateUserRoute,
+  responseSchema as createUserResponseSchema,
+  bodySchema as createUserBodySchema,
+} from './schemas/createUser'
 
 const routes: FastifyPluginAsync = (instance) => {
-  /**
-   * @api {GET} / Get all users
-   * @apiName GetUsers
-   * @apiGroup GetUsers
-   * @apiVersion 1.0.0
-   *
-   * @apiSuccess (200) {GetUsersResponse} Static response indicating success
-   */
   instance.route<GetUsersRoute>({
-    method: "GET",
-    url: "/",
+    method: 'GET',
+    url: '/',
     handler: getUsers,
-    config: {
-      secure: false,
-    },
     schema: {
+      tags: ['User'],
+      summary: 'Get all users',
+      description: 'Retrieve all users',
       response: {
         200: getUsersResponseSchema,
       },
     },
-  });
+  })
 
-  return Promise.resolve();
-};
+  instance.route<GetUserByIdRoute>({
+    method: 'GET',
+    url: '/:userId',
+    handler: getUserById,
+    schema: {
+      tags: ['User'],
+      summary: 'Get user by ID',
+      description: 'Retrieve one user by ID',
+      params: getUserByIdParamsSchema,
+      response: {
+        200: getUserByIdResponseSchema,
+      },
+    },
+  })
 
-export default routes;
+  instance.route<CreateUserRoute>({
+    method: 'POST',
+    url: '/',
+    handler: createUser,
+    schema: {
+      tags: ['User'],
+      summary: 'Create a user',
+      description: 'Create a new user',
+      body: createUserBodySchema,
+      response: {
+        200: createUserResponseSchema,
+      },
+    },
+  })
+
+  return Promise.resolve()
+}
+
+export default routes

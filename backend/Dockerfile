@@ -11,11 +11,9 @@ RUN apt-get update && \
 USER node
 
 COPY --chown=node src src
-COPY --chown=node prisma prisma
 COPY --chown=node package.json .
 COPY --chown=node tsconfig.json .
 COPY --chown=node package-lock.json .
 
 RUN npm i
 RUN npm run build
-RUN npx prisma generate

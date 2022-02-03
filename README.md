@@ -4,22 +4,27 @@ Contents:
 
 - TypeScript
 - Fastify
-- Prisma
+- Pino
 - PostgreSQL
+- node-pg-migrate
+- pgtyped
 - React
 - Tailwind
 - Vite
 - Docker
 - Testcontainers
-- Vitest? Jest?
-- Graphile Migrate
+- Jest
+- Swagger
 
 To start: `docker compose up --build`
 
 ## TODO
 
-- Logging
-- Test frameworks for backend and frontend
+- Linting
+- Test framework for frontend
+- Storybook
 - Frontend state mgmt
 - Frontend routing
+- Frontend data fetching
+- Lefthook
 - ...
