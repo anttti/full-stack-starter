@@ -3,16 +3,12 @@ pre-commit:
   commands:
     backend-linter:
       root: "backend/"
-      files: git diff --name-only @{push}
-      glob: "*.{js,ts,jsx,tsx}"
-      run: npx eslint {files}
+      glob: "*.{js,ts}"
+      run: npx eslint {staged_files}
+
+pre-push:
+  parallel: true
+  commands:
     backend-tests:
       root: "backend/"
-      files: git diff --name-only @{push}
-      glob: "*.{js,ts, jsx, tsx}"
       run: npm run test
-    # frontend-linter:
-    #   root: "frontend/"
-    #   files: git diff --name-only @{push}
-    #   glob: "./frontend/**/*.{js,ts,jsx,tsx}"
-    #   run: cd frontend && npx eslint {files}

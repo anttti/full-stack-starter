@@ -15,15 +15,19 @@ Contents:
 - Testcontainers
 - Jest
 - Swagger
+- Lefthook
 
-To start: `docker compose up --build`
+To start:
+
+- `npm install` in repo root to install git hooks
+- `docker compose up --build`
+- Open [localhost:3000](http://localhost:3000)
 
 ## TODO
 
-- Linting
-- Test framework for frontend
 - Storybook
+- Frontend tests
+- Frontend linting
 - Frontend state mgmt
 - Frontend data fetching
-- Lefthook
 - ...
