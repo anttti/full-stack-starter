@@ -11,7 +11,7 @@ const Body = Codec.interface({
 const bodySchema = Body.schema()
 
 const Response = Codec.interface({
-  id: string,
+  postId: string,
 })
 const responseSchema = Response.schema()
 

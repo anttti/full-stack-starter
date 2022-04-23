@@ -4,4 +4,4 @@
 */
 INSERT INTO "posts" ("title", "body", "authorId")
 VALUES :post
-RETURNING "id";
+RETURNING "postId";

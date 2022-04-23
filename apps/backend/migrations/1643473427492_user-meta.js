@@ -1,32 +1,32 @@
 /* eslint-disable camelcase */
 
-exports.shorthands = undefined;
+exports.shorthands = undefined
 
 exports.up = (pgm) => {
-  pgm.createType("user_type", ["NORMAL", "ADMIN"]);
-  pgm.createType("color", ["RED", "GREEN", "BLUE"]);
+  pgm.createType('user_type', ['NORMAL', 'ADMIN'])
+  pgm.createType('color', ['RED', 'GREEN', 'BLUE'])
 
-  pgm.addColumns("users", {
+  pgm.addColumns('users', {
     userType: {
-      type: "user_type",
+      type: 'user_type',
       notNull: true,
-      default: "NORMAL",
+      default: 'NORMAL',
     },
     meta: {
-      type: "jsonb",
+      type: 'jsonb',
       notNull: true,
-      default: "{}",
+      default: '{}',
     },
     favoriteColors: {
-      type: "color[]",
+      type: 'color[]',
       notNull: true,
-      default: "{}",
+      default: '{}',
     },
-  });
-};
+  })
+}
 
 exports.down = (pgm) => {
-  pgm.dropColumns("users", ["userType", "meta", "favoriteColors"]);
-  pgm.dropType("color");
-  pgm.dropType("user_type");
-};
+  pgm.dropColumns('users', ['userType', 'meta', 'favoriteColors'])
+  pgm.dropType('color')
+  pgm.dropType('user_type')
+}

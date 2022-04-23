@@ -1,0 +1,50 @@
+{
+  "name": "@full-stack-starter/codecs",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "private": true,
+  "scripts": {
+    "build:clean": "rm -rf dist",
+    "build": "yarn build:clean && tsc -p tsconfig-build.json",
+    "dev": "tsc -w",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "TZ=UTC jest --runInBand --detectOpenHandles",
+    "test:watch": "TZ=UTC jest --watchAll --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "purify-ts": "1.2.0",
+    "purify-ts-extra-codec": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/jest": "27.4.1",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.13.0",
+    "eslint": "8.10.0",
+    "eslint-plugin-fp": "2.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jest": "26.1.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "jest": "27.5.1",
+    "ts-jest": "27.1.3",
+    "typescript": "4.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testRegex": "/test/.*test\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
+  },
+  "packageManager": "yarn@1.22.15",
+  "engines": {
+    "node": ">=16.13.2",
+    "yarn": ">=1.22.15"
+  }
+}
