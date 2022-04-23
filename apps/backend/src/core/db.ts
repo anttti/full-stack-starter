@@ -1,8 +1,45 @@
 import { PreparedQuery } from '@pgtyped/query'
+import type { PostgresDb } from 'fastify-postgres'
 import { PoolClient } from 'pg'
-import { EitherAsync, Just, Maybe, Nothing } from 'purify-ts'
+import { EitherAsync, Just, Maybe, Nothing, Left, Right } from 'purify-ts'
 
 import { AppError, errors } from './errors'
+
+/**
+ * A wrapper helper function for accessing the DB without having to worry about
+ * forgetting to release the client back to the pool
+ * @param postgres fastify-postgres handle to PG
+ * @param fn The callback function to run using the DB client
+ */
+const withDb =
+  (postgres: PostgresDb & Record<string, PostgresDb>) =>
+  async (fn: (db: PoolClient) => Promise<unknown>) => {
+    const client = await postgres.connect()
+    await fn(client)
+    client.release()
+  }
+
+/**
+ * A wrapper helper function for running DB queries in a transaction. Closes the
+ * client after the operation is done.
+ * @param postgres fastify-postgres handle to PG
+ * @param fn The callback function to run using the DB client
+ */
+const inTransaction = <L, R>(
+  postgres: PostgresDb & Record<string, PostgresDb>,
+  fn: (db: PoolClient) => EitherAsync<L, R>
+) =>
+  EitherAsync.fromPromise(() =>
+    postgres
+      .transact(async (client) =>
+        fn(client).caseOf({
+          Left: (e) => Promise.reject(e),
+          Right: (recipe) => Promise.resolve(recipe),
+        })
+      )
+      .then(Right)
+      .catch((reason: L) => Left(reason))
+  )
 
 /**
  * Perform a db query expecting exactly one result. Returns a Left if != 1 rows are returned
@@ -84,4 +121,4 @@ const many = <ParamsType, ReturnType>(
     return []
   })
 
-export { one, oneOrNone, many }
+export { withDb, inTransaction, one, oneOrNone, many }

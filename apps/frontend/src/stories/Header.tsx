@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import { Button } from './Button';
-import './header.css';
+import { Button } from './Button'
+import './header.css'
 
-interface HeaderProps {
-  user?: {};
-  onLogin: () => void;
-  onLogout: () => void;
-  onCreateAccount: () => void;
+interface Props {
+  user?: {}
+  onLogin: () => void
+  onLogout: () => void
+  onCreateAccount: () => void
 }
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
+export const Header: React.FC<Props> = ({ user, onLogin, onLogout, onCreateAccount }) => (
   <header>
     <div className="wrapper">
       <div>
@@ -44,4 +44,4 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
       </div>
     </div>
   </header>
-);
+)
