@@ -1,6 +1,7 @@
 {
-  "name": "server",
-  "version": "1.0.0",
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
   "description": "",
   "main": "./dist/src/server.js",
   "scripts": {
@@ -13,7 +14,9 @@
     "pg:watch": "pgtyped -w -c pgtyped.config.json",
     "test": "TZ=UTC jest --runInBand --detectOpenHandles --coverage",
     "test:watch": "TZ=UTC jest --watchAll --runInBand --detectOpenHandles --coverage",
-    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'"
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
+    "migration:up": "node-pg-migrate up -m migrations",
+    "migration:create": "node-pg-migrate create -j sql -m migrations"
   },
   "keywords": [],
   "author": "",

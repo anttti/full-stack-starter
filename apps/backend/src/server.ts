@@ -8,8 +8,8 @@ initApp()
   .then((app) => {
     if (isDevEnvironment) {
       app.log.info(app.printRoutes())
+      app.swagger()
     }
-    app.swagger()
     app.listen(port, getConfig('HOST', '127.0.0.1'), () =>
       app.log.info(`Example API listening on port ${port}`)
     )

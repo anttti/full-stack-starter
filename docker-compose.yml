@@ -2,41 +2,41 @@ version: "3.8"
 
 services:
   db:
-    build: ./backend/database
+    build: ./apps/backend/database
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
-      - ./backend/database/setup:/docker-entrypoint-initdb.d
+      - ./apps/backend/database/setup:/docker-entrypoint-initdb.d
 
-  frontend:
-    build:
-      context: ./frontend
-    command: ["npm", "run", "dev", "--", "--host"]
-    ports:
-      - "3000:3000"
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   command: ["npm", "run", "dev", "--", "--host"]
+  #   ports:
+  #     - "3000:3000"
 
-  backend:
-    build:
-      context: ./backend
-    command: ["/app/wait-for/wait-for", "db:5432", "--", "npm", "run", "dev"]
-    ports:
-      - "4000:4000"
-    environment:
-      - PORT=4000
-      - HOST=0.0.0.0
-      - NODE_ENV=development
-      - PG_HOST=db
-      - PG_PORT=5432
-      - PG_USER=app_user
-      - PG_PASSWORD=app_user
-      - PG_DATABASE=example
-      # For node-pg-migrate
-      - DATABASE_URL=postgres://migration_user:migration_user@db:5432/example
-    volumes:
-      - ./backend:/app/:cached
-      - /app/node_modules
-      - /app/dist
-    depends_on:
-      - db
+  # backend:
+  #   build:
+  #     context: ./backend
+  #   command: ["/app/wait-for/wait-for", "db:5432", "--", "npm", "run", "dev"]
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     - PORT=4000
+  #     - HOST=0.0.0.0
+  #     - NODE_ENV=development
+  #     - PG_HOST=db
+  #     - PG_PORT=5432
+  #     - PG_USER=app_user
+  #     - PG_PASSWORD=app_user
+  #     - PG_DATABASE=example
+  #     # For node-pg-migrate
+  #     - DATABASE_URL=postgres://migration_user:migration_user@db:5432/example
+  #   volumes:
+  #     - ./backend:/app/:cached
+  #     - /app/node_modules
+  #     - /app/dist
+  #   depends_on:
+  #     - db
