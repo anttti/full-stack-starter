@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "apps/backend"
+    },
+    {
+      "path": "apps/frontend"
+    },
+    {
+      "path": "packages/codecs"
+    }
+  ]
+}

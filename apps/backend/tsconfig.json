@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": [
+      "es2019",
+      "DOM"
+    ],
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "target": "es2019",
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+  "ts-node": {
+    "files": true
+  }
+}
